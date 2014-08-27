@@ -4,6 +4,7 @@
     "main": "lib/textree.js",
     "dependencies": {
         "forever": "0.11.1",
-        "q": "1.0"
+        "q": "1.0",
+        "nodegit": "http://registry.npmjs.org/nodegit/-/nodegit-0.1.4.tgz"
     }
 }
