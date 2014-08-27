@@ -1,0 +1,68 @@
+#!/usr/bin/env nodejs
+
+
+var fs = require("fs");
+// var Q = require("q");
+var process = require("process");
+var Text2trees = require("./lib/Text2trees.js");
+var Trees2dom = require("./lib/Trees2dom.js");
+var Trees2proc = require("./lib/Trees2proc.js");
+var Trees2xml = require("./lib/Trees2xml.js");
+
+// console.log(fs);
+
+// http://codewinds.com/blog/2013-08-20-nodejs-transform-streams.html#creating_custom_transform_streams
+
+
+function boot_dom() {
+
+  var hamlParser = new Text2trees();
+  fs.createReadStream("data.haml").pipe(hamlParser);
+  // process.stdin.pipe(hamlParser);
+  hamlParser.on('readable', function () {
+    var data;
+    while ((data = hamlParser.read())) {
+      console.log("got: ", data);
+    }
+  });
+}
+
+function boot_xml() {
+
+  var text2trees = new Text2trees();
+  var trees2xml = new Trees2xml();
+  var trees2proc = new Trees2proc();
+  // var trees2dom = new Trees2dom();
+  // fs.createReadStream("data.haml").pipe(hamlParser);
+
+  // hamlParser.pipe(haml2xml);
+  // haml2xml.pipe(process.stdout);
+
+  // var last = hamlParser;
+  // var last = trees2dom;
+  var last = trees2xml;
+  // last.on('readable', function () {
+  //   var data;
+  //   while ((data = last.read())) {
+  //     // console.log("entry");
+  //     console.log(data);
+  //   }
+  // });
+
+  // hamlParser.pipe(trees2dom);
+  trees2xml.pipe(process.stdout);
+  trees2proc.pipe(trees2xml);
+  text2trees.pipe(trees2proc);
+  process.stdin.pipe(text2trees);
+
+  // haml2xml.on('readable', function () {
+  //   var data;
+  //   while ((data = haml2xml.read())) {
+  //     console.log("got: ", data);
+  //   }
+  // });
+
+}
+
+// boot_dom();
+boot_xml();
