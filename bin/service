@@ -9,7 +9,7 @@ function processRequest(req, res) {
 
 
 var server = http.createServer(processRequest);
-var port = process.env.GLXC_HTTP_PORT || 8080;
+var port = process.env.TEXTREE_HTTP_PORT || 8080;
 
 try {
     server.listen(port);
