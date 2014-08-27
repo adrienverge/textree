@@ -1,0 +1,10 @@
+{
+    "name": "textree",
+    "version": "0.0.1",
+    "main": "lib/textree.js",
+    "dependencies": {
+        "forever": "0.11.1",
+        "q": "1.0",
+        "nodegit": "0.1.4"
+    }
+}
