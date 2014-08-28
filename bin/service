@@ -1,32 +1,20 @@
 #!/usr/bin/env nodejs
 
-var env = process.env;
-var port = env.TEXTREE_HTTP_PORT || 8080;
 var http = require("http");
-var url = require("url");
-var textree = require("../lib/textree");
-var Q = require("q");
+var env = require("../lib/env");
+var controller = require("../lib/http-controller");
 
 
-function processRequest(request, response) {
-  var path = request.url.replace(/\?.*$/, "");
+function startServer() {
+  var server = http.createServer(controller.process);
 
-  Q.when(textree.getStream(path)).then(function(stream) {
-    response.writeHead(200, {'Content-Type': stream.getContentType()});
-
-    // console.log("req", req.url, url.parse(req.url));
-    stream.pipe(response);
-    response.end('Hello World\n');
-  });
-
+  try {
+    console.log("binding HTTP service to port", env.httpPort);
+    server.listen(env.httpPort);
+  }
+  catch (e) {
+    console.log("could not bind to port:", env.httpPort);
+  }
 }
 
-
-var server = http.createServer(processRequest);
-
-try {
-  server.listen(port);
-}
-catch (e) {
-  console.log("could not bind to port:", port);
-}
+env.init().then(startServer).done();
