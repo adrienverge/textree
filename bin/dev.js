@@ -5,7 +5,7 @@
 var textree = require("../lib/textree");
 // var Q = require("q");
 
-var path = "tested.textree";
+var path = "first.textree";
 
 // for (var i = 0; i < 5000; i++) {
 var env = require("../lib/env");
