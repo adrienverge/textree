@@ -4,6 +4,11 @@
 
 var textree = require("../lib/textree");
 // var Q = require("q");
+// var CatFile = require("./CatFile");
+// var Text2trees = require("./Text2trees");
+var Trees2proc = require("../lib/Trees2proc.js");
+// var Trees2xml = require("./Trees2xml");
+var TransformChain = require("../lib/TransformChain");
 
 var path = "first.textree";
 
@@ -11,14 +16,19 @@ var path = "first.textree";
 var env = require("../lib/env");
 env.init().then(function() {
 
-  return textree.getStream(path).then(function(stream) {
-    // stream.on("readable", function(aa) {
-    //   var data = stream.read();
-    //   console.error("INREAD", data);
-    // });
-    stream.pipe(process.stdout);
 
-  });
+  var proc = new Trees2proc();
+  var chain = new TransformChain([proc, process.stdout]);
+
+  proc.sourceFile(path);
+
+  // return textree.getStream(path).then(function(stream) {
+  //   // stream.on("readable", function(aa) {
+  //   //   var data = stream.read();
+  //   //   console.error("INREAD", data);
+  //   // });
+  //   stream.pipe(process.stdout);
+  // });
 
 }).done();
 
