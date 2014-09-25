@@ -31,7 +31,7 @@ ConsoleFilter.prototype._transform = function(chunk, encoding, done) {
   if (typeof chunk == "string" || Buffer.isBuffer(chunk)) {
     this.push(chunk);
   } else {
-    console.log("ConsoleFilter: event", chunk);
+    // console.log("ConsoleFilter: event", chunk);
   }
   done();
 };
