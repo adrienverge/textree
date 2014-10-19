@@ -4,7 +4,6 @@ var http = require("http");
 var env = require("../lib/env");
 var controller = require("../lib/http-controller");
 
-
 function startServer() {
   var server = http.createServer(controller.process);
 
