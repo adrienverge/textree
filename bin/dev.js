@@ -43,9 +43,13 @@ var path = process.argv[2] || "";
 var env = require("../lib/env");
 env.init().then(function() {
 
-
-
-  var proc = new Trees2proc();
+  var proc = new Trees2proc({globalContext: {
+      REQUEST: {
+        path: path,
+        query: "",
+        headers: {}
+      }
+  }});
   var chain = new TransformChain([proc, new ConsoleFilter(), process.stdout]);
 
   // proc.sourceFile(path);
