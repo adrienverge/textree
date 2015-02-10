@@ -1,0 +1,5 @@
+// comment 1
+element1
+// comment 2 must not break element1 because of indent
+  child
+  //last comment no leading space

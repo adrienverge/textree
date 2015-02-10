@@ -1,0 +1,8 @@
+element1(attr=value)
+element2(attr=value with spaces)
+element3(attr1=value1,attr2=value2)
+element4(attr1 = value1 with padding  ,  attr2   =   other padded  value  )
+element5(
+  attr1 = value1
+  attr2 = value2
+)

@@ -1,0 +1,29 @@
+
+This directory contains unit tests for the textree pipeline engine.
+
+Start the tests using the script: ./run-tests.sh
+
+
+Tests are devided into groups, each in a subdirectory named group.<name>.
+For each group, the file group.<name>/pipeline must contain the arguments
+to the bin/textree command.
+
+A unit test is made of 2 files:
+
+  group.<name>/<test name>.in
+      content which is piped into the textree command
+
+  group.<name>/<test name>.out
+      content that is supposed to be output by the pipeline command.
+      The contents must be exactly the same, or the test fails.
+
+
+When a test is failed, a message is printed with the command line of
+the unit test (for easy copy/paste), with a diff between the
+expected content and the actual content.
+
+
+.. read the script: ./runTests.sh
+
+
+Tests can also be useful for learning Textree.
