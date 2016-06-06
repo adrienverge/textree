@@ -1,5 +1,13 @@
 #!/usr/bin/env nodejs
 
+/**
+ ** HTTP entry point of Textree
+ **
+ ** Actually handled by the lib/http-constroller.js code.
+ ** This only create the NodeJS http service, connecting the Textree
+ ** http-controller callback to it.
+ */
+
 var http = require("http");
 var env = require("../lib/env");
 var controller = require("../lib/http-controller");
