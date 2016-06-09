@@ -15,12 +15,12 @@ var args = process.argv.slice(2);
 if (args.length == 0) {
   process.stderr.write(
     "usage: "+process.argv[1] +
-      " { parse-tt | process-tt | dump-xml } [ ... ! element N]]\n\n" +
+      " { parse-tt | process-tt | format-xml } [ ... ! element N]]\n\n" +
       "where 'element' is one of:\n" +
       "  'parse-tt'\tparse textree to events\n" +
       "  'process-tt'\tprocess dynamic textree events (':' commands)\n" +
-      "  'dump-xml'\tserialize textree events to XML/HTML\n" +
-      "  'dump-json'\tserialize textree events to JSON\n" +
+      "  'format-xml'\tserialize textree events to XML/HTML\n" +
+      "  'format-json'\tserialize textree events to JSON\n" +
       "  'through'\tjust pass the content through\n" +
       "\n"
   );
@@ -31,8 +31,8 @@ if (args.length == 0) {
   var modules = {
     "parse-tt": "../lib/Text2trees.js",
     "process-tt": "../lib/Trees2proc.js",
-    "dump-xml": "../lib/Trees2xml.js",
-    "dump-json": "../lib/DumpJson.js",
+    "format-xml": "../lib/Trees2xml.js",
+    "format-json": "../lib/DumpJson.js",
     "through": "../lib/Through.js",
   };
 
