@@ -5,7 +5,7 @@
     "dependencies": {
         "forever": "0.11.1",
         "kew": "0.4.0",
-        "nodegit": "http://registry.npmjs.org/nodegit/-/nodegit-0.1.4.tgz",
+        "nodegit": "latest",
         "mc": "1.0.6"
     }
 }
