@@ -3,14 +3,11 @@
 // export TEXTREE_GIT_DIR=/local.repository.git/
 //
 
-var textree = require("../lib/textree");
-var Trees2proc = require("../lib/Trees2proc.js");
-var Text2trees = require("../lib/Text2trees");
-var CatFile = require("../lib/CatFile");
-var TransformChain = require("../lib/TransformChain");
-var RoutePath = require("../lib/RoutePath");
 var stream = require('stream');
 var util = require("util");
+
+var RoutePath = require("../lib/stream/RoutePath");
+var ProcessNodes = require("../lib/stream/export/ProcessNodes.js");
 
 // for (var i = 0; i < 5000; i++) {
 
@@ -78,7 +75,7 @@ env.init()
   .then(function(routeStream) {
 
     routeStream
-      .pipe(new Trees2proc({globalContext: {
+      .pipe(new ProcessNodes({globalContext: {
         REQUEST: {
           path: routePath,
         },

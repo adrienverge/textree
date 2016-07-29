@@ -12,17 +12,11 @@
 
 
 var args = process.argv.slice(2);
-if (0 && args.length == 0) {
+if (args.length == 0) {
   process.stderr.write(
     "usage: "+process.argv[1] +
-      " { parse-tt | process-tt | format-xml } [ ... ! element N]]\n\n" +
-      "where 'element' is one of:\n" +
-      "  'parse-tt'\tparse textree to events\n" +
-      "  'process-tt'\tprocess dynamic textree events (':' commands)\n" +
-      "  'format-xml'\tserialize textree events to XML/HTML\n" +
-      "  'format-json'\tserialize textree events to JSON\n" +
-      "  'through'\tjust pass the content through\n" +
-      "\n"
+      " { ParseTextree | ProcessNodes | PrintXml } [ ... ! {element N}]]\n\n" +
+      "where {element N} is a stream class present in lib/stream/export/\n"
   );
   process.exit(-1);
 
@@ -36,7 +30,7 @@ if (0 && args.length == 0) {
 
     args.forEach(function(arg) {
       if (arg != "!") {
-        var _Class = "../lib/"+arg+".js";
+        var _Class = "../lib/stream/export/"+arg+".js";
         if (typeof _Class == "string") {
           _Class = require(_Class);
         }
