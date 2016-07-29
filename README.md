@@ -121,7 +121,7 @@ The ```:on``` instruction lets you capture a custom tag whenever it is
 met and replace it with a specific node structure:
 
 ```jade
-:: ext
+:on ext
   a.ext.target=_blank
     :attr += ext.attributes
     :process ext.children
@@ -143,10 +143,9 @@ image frames with legend, extending markdown...
 
 ## Serving HTTP content from a Git repository
 
-All content is accessed from a Git repository branch.
-The environment variable ```TEXTREE_GIT_DIR``` must point to a valid
-and possibly bare Git repository (such as
-```/var/lib/textree/repository```).
+All content is accessed from a Git repository branch.  The environment
+variable ```TEXTREE_GIT_DIR``` must point to a valid and possibly bare
+Git repository (such as ```/var/lib/textree/repository```).
 
 Naturally, git-push is the favorite way to update the website. A
 ```post-update``` hook can send ```SIGHUP``` to tell the textree
