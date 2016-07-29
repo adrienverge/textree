@@ -8,11 +8,11 @@
 
 // http://codewinds.com/blog/2013-08-20-nodejs-transform-streams.html#creating_custom_transform_streams
 
-var TransformChain = require("../lib/TransformChain");
+// var TransformChain = require("../lib/TransformChain");
 
 
 var args = process.argv.slice(2);
-if (args.length == 0) {
+if (0 && args.length == 0) {
   process.stderr.write(
     "usage: "+process.argv[1] +
       " { parse-tt | process-tt | format-xml } [ ... ! element N]]\n\n" +
@@ -28,47 +28,28 @@ if (args.length == 0) {
 
 } else {
 
-  var modules = {
-    "parse-tt": "../lib/Text2trees.js",
-    "process-tt": "../lib/Trees2proc.js",
-    "format-xml": "../lib/Trees2xml.js",
-    "format-json": "../lib/DumpJson.js",
-    "through": "../lib/Through.js",
-  };
+  var env = require("../lib/env");
+  var readable = process.stdin;
 
-  var transforms = [process.stdin];
+  env.init().then(function() {
+    var transforms = [process.stdin];
 
-  // var lastPipe = process.stdin;
-
-  args.forEach(function(arg) {
-    if (arg != "!") {
-      var _Class = modules[arg];
-      if (!_Class) {
-        process.stderr.write("error: module '"+arg+"' does not exist (run without args for usage info)\n");
-        process.exit(-2);
+    args.forEach(function(arg) {
+      if (arg != "!") {
+        var _Class = "../lib/"+arg+".js";
+        if (typeof _Class == "string") {
+          _Class = require(_Class);
+        }
+        var transform = new _Class();
+        // console.log("pipe: "+readable.constructor.name+" -> "+transform.constructor.name);
+        readable.pipe(transform);
+        readable = transform;
       }
-      if (typeof _Class == "string") {
-        _Class = require(_Class);
-      }
-      var transform = new _Class();
-      transforms.push(transform);
-      // lastPipe.pipe(transform);
-      // lastPipe = transform;
-    }
-  });
-  // lastPipe.pipe(process.stdout);
+    });
 
-  // console.log(transforms[transforms.length - 1]);
-  // if (transforms[transforms.length - 1]._writableState.objectMode) {
-  //   console.log("ERROR: last item of transform chain sends object events. It must be text to process STDOUT.");
-  //   console.log("Add item like \"dump-json\" or \"dump-xml\".");
-  //   console.log("Exiting...\n");
-  //   process.exit(-1);
-  // }
+    // console.log("pipe: "+readable.constructor.name+" -> "+process.stdout.constructor.name);
+    readable.pipe(process.stdout);
 
-  transforms.push(process.stdout);
-
-  var chain = new TransformChain(transforms);
-
+  }).done();
 
 }

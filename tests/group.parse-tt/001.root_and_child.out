@@ -1,4 +1,4 @@
-{"type":"start","name":"root"}
-{"type":"start","name":"child"}
+{"type":"start","name":"root","attributes":{}}
+{"type":"start","name":"child","attributes":{}}
 {"type":"end"}
 {"type":"end"}

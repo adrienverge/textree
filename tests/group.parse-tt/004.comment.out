@@ -1,7 +1,7 @@
 {"type":"comment","value":"// comment 1"}
-{"type":"start","name":"element1"}
+{"type":"start","name":"element1","attributes":{}}
 {"type":"comment","value":"// comment 2 must not break element1 because of indent"}
-{"type":"start","name":"child"}
+{"type":"start","name":"child","attributes":{}}
 {"type":"comment","value":"//last comment no leading space"}
 {"type":"end"}
 {"type":"end"}

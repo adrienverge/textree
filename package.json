@@ -1,11 +1,21 @@
 {
     "name": "textree",
+    "description": "Textree is a Jade-like syntax processor that allows easy writing of HTML or XML files with auto-templating and Javascript-based scripting features.",
     "version": "0.0.1",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/jfgigand/textree.git"
+    },
+    "authors": [
+      "jean-François Gigand <jf@geonef.fr> (https://github.com/jfgigand)"
+    ],
+    "license": "GPL-3.0",
     "main": "lib/textree.js",
     "dependencies": {
         "forever": "0.11.1",
         "kew": "0.4.0",
-        "nodegit": "latest",
-        "mc": "1.0.6"
+        "nodegit": "0.15.1",
+        "mc": "1.0.6",
+        "minimatch": "3.0.2"
     }
 }

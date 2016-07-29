@@ -1,18 +1,18 @@
-{"type":"start","name":"element1"}
+{"type":"start","name":"element1","attributes":{}}
 {"type":"attr","name":"attr","value":"value"}
 {"type":"end"}
-{"type":"start","name":"element2"}
+{"type":"start","name":"element2","attributes":{}}
 {"type":"attr","name":"attr","value":"value with spaces"}
 {"type":"end"}
-{"type":"start","name":"element3"}
+{"type":"start","name":"element3","attributes":{}}
 {"type":"attr","name":"attr1","value":"value1"}
 {"type":"attr","name":"attr2","value":"value2"}
 {"type":"end"}
-{"type":"start","name":"element4"}
+{"type":"start","name":"element4","attributes":{}}
 {"type":"attr","name":"attr1","value":"value1 with padding"}
 {"type":"attr","name":"attr2","value":"other padded  value"}
 {"type":"end"}
-{"type":"start","name":"element5"}
+{"type":"start","name":"element5","attributes":{}}
 {"type":"attr","name":"attr1","value":"value1"}
 {"type":"attr","name":"attr2","value":"value2"}
 {"type":"end"}

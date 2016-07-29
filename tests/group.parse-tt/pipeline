@@ -1,1 +1,1 @@
-parse-tt ! dump-json
+parse-tt ! format-json

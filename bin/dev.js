@@ -1,4 +1,7 @@
 #!/usr/bin/env nodejs
+//
+// export TEXTREE_GIT_DIR=/local.repository.git/
+//
 
 // http://thanpol.as/javascript/promises-a-performance-hits-you-should-be-aware-of/
 

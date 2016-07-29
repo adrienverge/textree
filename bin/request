@@ -1,0 +1,90 @@
+#!/usr/bin/env nodejs
+//
+// export TEXTREE_GIT_DIR=/local.repository.git/
+//
+
+var textree = require("../lib/textree");
+var Trees2proc = require("../lib/Trees2proc.js");
+var Text2trees = require("../lib/Text2trees");
+var CatFile = require("../lib/CatFile");
+var TransformChain = require("../lib/TransformChain");
+var RoutePath = require("../lib/RoutePath");
+var stream = require('stream');
+var util = require("util");
+
+// for (var i = 0; i < 5000; i++) {
+
+function ConsoleFilter(response, options) {
+  if (!options) { options = {}; }
+  options.objectMode = true;
+  stream.Transform.call(this, options);
+
+  this.response = response;
+
+  // this.on("finish", this._onEnd.bind(this));
+}
+
+util.inherits(ConsoleFilter, stream.Transform);
+module.exports = ConsoleFilter;
+
+ConsoleFilter.prototype._transform = function(chunk, encoding, done) {
+  if (chunk && chunk.type == "text") {
+    chunk = chunk.text;
+  }
+  if (typeof chunk == "string" || Buffer.isBuffer(chunk)) {
+    if (!inBody) {
+      process.stderr.write("\n");
+    }
+    this.push(chunk);
+    var inBody = true;
+
+  } else {
+    var event = chunk;
+    if (event.type == "meta" && !inBody) {
+      var name, value = "";
+      switch (event.name) {
+      case "status":
+        process.stderr.write("Status: "+event.value+"\n");
+        break;
+      case "type":
+        process.stderr.write("Content-Type: "+event.value+"\n");
+        break;
+      case "header":
+        process.stderr.write(event.header+": "+event.value+"\n");
+        break;
+      default:
+        console.log("WriteHttpResponse: invalid 'meta' control event name: "+event.name);
+      }
+    } else {
+      process.stderr.write("EVENT: "+JSON.stringify(chunk)+"\n");
+      // console.log("ConsoleFilter: event", chunk);
+    }
+  }
+
+  done();
+};
+
+
+var path = process.argv[2] || "";
+var routePath;
+var env = require("../lib/env");
+env.init()
+  .then(function() {
+
+    routePath = new RoutePath(path);
+
+    return routePath.stream();
+  })
+  .then(function(routeStream) {
+
+    routeStream
+      .pipe(new Trees2proc({globalContext: {
+        REQUEST: {
+          path: routePath,
+        },
+      }}))
+      .pipe(new ConsoleFilter())
+      .pipe(process.stdout);
+
+  })
+  .done();
