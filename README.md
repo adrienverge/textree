@@ -95,22 +95,23 @@ section
 section
   h2 Including a plain text file
   pre
-    :process.CatFile
+    :process.ReadFile
       fs:path README
 
 section
   h2 Including parsed nodes from a Markdown file
   pre
     :process.ParseMarkdown
-      :process.CatFile
+      :process.ReadFile
         fs:path README.md
 
 section
-  h2 Including parsed nodes from a Textree file
+  h2 Including parsed nodes from Textree files
   pre
     :process.ParseTextree
-      :process.CatFile
+      :process.ReadFile
         fs:path README.tt
+        fs:glob features/*.tt
 ```
 
 
